@@ -16,10 +16,11 @@ public class HelloWorldServlet extends HttpServlet {
 
         //when the url looks like this: http://localhost:8080/hello?name=codeup
         //the page will display "Hello, codeup!" otherwise it will display "Hello, World!"
+
         String name = req.getParameter("name");
         if(name == null) {
             name = "World";
-        } else {
+        }
             try {
                 res.setContentType("text/html");
                 PrintWriter out = res.getWriter();
@@ -27,7 +28,7 @@ public class HelloWorldServlet extends HttpServlet {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+
 
 
     }
