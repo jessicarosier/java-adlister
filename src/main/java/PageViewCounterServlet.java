@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-@WebServlet(name = "PageViewCounterServlet", urlPatterns = "/count")
+@WebServlet(name = "PageViewCounterServlet", urlPatterns = "/view-count")
 public class PageViewCounterServlet extends HttpServlet {
     protected int count = 0;
 
@@ -17,7 +17,7 @@ public class PageViewCounterServlet extends HttpServlet {
 
         if (reset != null) {
             count = 0;
-            response.sendRedirect("/count");
+            response.sendRedirect("/view-count");
         }
 
         try {
