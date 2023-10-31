@@ -10,6 +10,7 @@ public class HelloWorldServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+
         String name = request.getParameter("name");
 
         if(name == null) {
