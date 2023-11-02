@@ -17,6 +17,6 @@ public class AdsIndexServlet extends HttpServlet {
             request.setAttribute("pageColor", session.getAttribute("SessionColor"));
         }
         request.setAttribute("ads", DaoFactory.getAdsDao().all());
-        request.getRequestDispatcher("/ads/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
     }
 }

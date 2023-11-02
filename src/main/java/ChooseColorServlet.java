@@ -11,7 +11,7 @@ public class ChooseColorServlet extends HttpServlet {
 
     @Override
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/favorite-color.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/favorite-color.jsp").forward(request, response);
     }
 
     @Override
