@@ -7,17 +7,15 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="/ads">Adlister</a>
         </div>
-        <c:choose>
-        <c:when test="<%=session.getAttribute("user") == null%>">
+
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/logout">logout
-            </a></li>
-            </c:when>
-            <c:otherwise>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login">login
-                </a></li>
-            </c:otherwise>
+            <c:choose>
+                <c:when test="${user == null}">
+                    <li><a href="/login">Login</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="/logout">Logout</a></li>
+                </c:otherwise>
             </c:choose>
 
         </ul>
