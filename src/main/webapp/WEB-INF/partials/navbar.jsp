@@ -7,9 +7,11 @@
             <a class="navbar-brand" href="/ads">Adlister</a>
         </div>
 
+        <% session = request.getSession();%>
+
         <ul class="nav navbar-nav navbar-right">
             <c:choose>
-                <c:when test="${user == null}">
+                <c:when test='<%=session.getAttribute("user") == null%>'>
                     <li><a href="/login">Login</a></li>
                 </c:when>
                 <c:otherwise>
