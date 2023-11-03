@@ -10,7 +10,7 @@
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
     <div class="container">
-        <h1> Hello <%=session.getAttribute("user")%></h1>
+        <h1> Hello ${user}! </h1>
     </div>
 </body>
 </html>
