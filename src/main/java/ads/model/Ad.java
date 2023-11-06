@@ -1,4 +1,8 @@
-public class Ad {
+package ads.model;
+
+import java.io.Serializable;
+
+public class Ad implements Serializable {
     private long id;
     private long userId;
     private String title;

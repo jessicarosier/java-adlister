@@ -1,3 +1,7 @@
+package ads.dao;
+
+import ads.model.Ad;
+
 import java.util.ArrayList;
 import java.util.List;
 
