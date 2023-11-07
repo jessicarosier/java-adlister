@@ -13,7 +13,6 @@ public class MySQLAdsDao implements Ads {
 
     private List<Ad> ads;
 
-
     public MySQLAdsDao(Config config) throws SQLException {
         DriverManager.registerDriver(new Driver());
         this.connection = DriverManager.getConnection(
