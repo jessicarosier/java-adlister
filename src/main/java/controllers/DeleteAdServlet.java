@@ -13,10 +13,6 @@ import java.sql.SQLException;
 @WebServlet (urlPatterns = "/delete")
 public class DeleteAdServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-
-
-    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String adId = request.getParameter("adid");
