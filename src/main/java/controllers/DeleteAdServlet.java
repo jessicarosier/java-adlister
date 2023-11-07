@@ -23,7 +23,6 @@ public class DeleteAdServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         response.sendRedirect("/ads");
 
     }
