@@ -10,4 +10,6 @@ public interface Ads {
     List<Ad> all() throws SQLException;
     // insert a new ad and return the new ad's id
     Long insert(Ad ad) throws SQLException;
+
+    void delete(String id) throws SQLException;
 }

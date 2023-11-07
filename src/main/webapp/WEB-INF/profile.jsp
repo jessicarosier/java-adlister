@@ -12,5 +12,6 @@
     <h1>Welcome, ${sessionScope.user}!</h1>
 </div>
 
+<jsp:include page="/WEB-INF/partials/script.jsp" />
 </body>
 </html>

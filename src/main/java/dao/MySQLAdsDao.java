@@ -2,7 +2,6 @@ package dao;
 
 import com.mysql.cj.jdbc.Driver;
 import models.Ad;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,6 @@ public class MySQLAdsDao implements Ads {
                 config.getUsername(),
                 config.getPassword()
         );
-
     }
 
     @Override
@@ -39,9 +37,7 @@ public class MySQLAdsDao implements Ads {
                         rs.getString("description")
                 );
                 ads.add(ad);
-                System.out.println(ad);
             }
-
 
         return ads;
     }
@@ -51,15 +47,21 @@ public class MySQLAdsDao implements Ads {
 
         try {
             Statement statement = connection.createStatement();
-            String insertQuery = "INSERT INTO ads (title, description, user_id) VALUES ('"+ ad.getTitle() +"', '"+ ad.getDescription() +"', "+ ad.getUserId() +")";
+            String insertQuery = "INSERT INTO ads (title, description, user_id) VALUES ('" + ad.getTitle() + "', '" + ad.getDescription() + "', " + ad.getUserId() + ")";
             statement.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-
         return (long) Statement.RETURN_GENERATED_KEYS;
+    }
+
+    @Override
+    public void delete(String id) throws SQLException {
+        Statement statement = connection.createStatement();
+        String deleteQuery = "DELETE FROM ads WHERE id = " + id + "";
+        statement.execute(deleteQuery);
     }
 
 
