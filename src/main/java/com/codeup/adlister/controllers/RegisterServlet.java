@@ -18,16 +18,18 @@ public class RegisterServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //stores the plaintext info the user typed into the form
         String username = request.getParameter("username");
         String email = request.getParameter("email");
-
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
+        //if the plain text password and password confirmation match, then hash the password and store the hash in a variable
         String hashedPassword = new String();
         if (password.equals(passwordConfirmation)) {
            hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
         } else {
+            //if the plaintext password and passwordConfirmation DO NOT match, redirect them to the registration form
             response.sendRedirect("/register");
         }
 
@@ -42,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        // create and save a new user
+        // create and save a new user, store the hashedPassword in the DB
         User user = new User(username, email, hashedPassword);
         DaoFactory.getUsersDao().insert(user);
         response.sendRedirect("/login");
