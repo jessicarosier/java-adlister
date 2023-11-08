@@ -26,8 +26,11 @@ public class MySQLUsersDao implements Users{
     @Override
     public User findByUsername(String username) {
         try {
+            //stores the SQL statement I want to run as a string
             String sql = "SELECT * FROM users WHERE username LIKE ?";
+            //allows us to execute the SQL statement with a ? (as a prepared statement)
             PreparedStatement statement = connection.prepareStatement(sql);
+            //tells the prepared statement WHAT we want to replace the question mark wtih
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {

@@ -1,6 +1,7 @@
 package com.codeup.adlister.controllers;
-
 import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.models.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,19 +21,34 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //stores the user input from the login form
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+
 
         // TODO: find a record in your database that matches the submitted password
         // TODO: make sure we find a user with that username
         // TODO: check the submitted password against what you have in your database
-        System.out.println(DaoFactory.getUsersDao().findByUsername(username).getUsername());
-        if (DaoFactory.getUsersDao().findByUsername(username).getUsername().equalsIgnoreCase(username) && DaoFactory.getUsersDao().findByUsername(username).getPassword().equals(password)) {
+        //DaoFactory.getUsersDao() is an instance of a MySQLUsersDao,
+        // .findByUsername() is a method that returns a User Object
+        // .getUsername() is a method that can be called on a User Object
+
+        User userFromDb = DaoFactory.getUsersDao().findByUsername(username);
+
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        System.out.println(hashedPassword);
+
+        boolean passwordsMatch = BCrypt.checkpw(hashedPassword, userFromDb.getPassword());
+        System.out.println(passwordsMatch);
+        System.out.println(userFromDb.getPassword());
+
+
+        if (userFromDb == null) {
+            response.sendRedirect("/login");
+        } else if (userFromDb.getUsername().equalsIgnoreCase(username) && passwordsMatch){
             // TODO: store the logged in user object in the session, instead of just the username
             request.getSession().setAttribute("user", username);
             response.sendRedirect("/profile");
-        } else if(DaoFactory.getUsersDao().findByUsername(username).getUsername() == null) {
-            response.sendRedirect("/login");
         } else {
             response.sendRedirect("/login");
         }

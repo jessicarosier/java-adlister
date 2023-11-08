@@ -1,9 +1,7 @@
 package com.codeup.adlister.dao;
-
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 import dao.Config;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +20,7 @@ public class MySQLAdsDao implements Ads {
                 config.getUsername(),
                 config.getPassword()
             );
+
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
         }
@@ -29,9 +28,8 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> all() {
-        PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT * FROM ads");
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM ads");
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
@@ -59,6 +57,14 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    @Override
+    public void delete(String id) throws SQLException {
+            Statement statement = connection.createStatement();
+            String deleteQuery = "DELETE FROM ads WHERE id = " + id + "";
+            statement.execute(deleteQuery);
+
+    }
+
     private String createInsertQuery(Ad ad) {
         return "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
 //        return "INSERT INTO ads(user_id, title, description) VALUES "
@@ -83,4 +89,8 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
+
+
+
 }
