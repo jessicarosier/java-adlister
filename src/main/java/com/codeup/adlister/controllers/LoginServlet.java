@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
 
         //if it's true that the stored hash belongs to the password the user typed in, then allow them to login and take them to their profile
         if (passwordsMatch) {
+            //set a session attribute to a user object of the user who just logged in
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/profile");
         } else {
