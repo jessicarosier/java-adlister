@@ -11,6 +11,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 300px;
+    border-radius: 5px;
+    width: 50vw;
+    height: 50vh;
     background-color: cornflowerblue;
+
 }

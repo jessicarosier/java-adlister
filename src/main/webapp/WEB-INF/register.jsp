@@ -14,24 +14,26 @@
 </head>
 <body>
 <div class="page-wrapper">
+    <h1>Register</h1>
 
-<div class="register-form">
+    <form class="register-form" method="post" action="/register">
 
-    <form method="post" action="/register" class="w-50">
-        <label> Name:
-            <input type="text" name="name" placeholder="John Doe" autocomplete="false">
+        <br>
+        <label> Username:
+            <input type="text" name="username" placeholder="Enter username" autocomplete="false" required>
         </label>
         <br>
         <label> Email:
-            <input type="email" name="email" placeholder="example@example.com" autocomplete="false">
+            <input type="email" name="email" placeholder="example@example.com" autocomplete="false" required>
         </label>
         <br>
         <label> Password:
-            <input type="password" name="password" placeholder="password" autocomplete="false">
+            <input type="password" name="password" placeholder="Enter password" autocomplete="false" required>
         </label>
-
+        <br>
+        <button class="btn btn-success" type="submit">Submit</button>
     </form>
-</div>
+
 
 </div>
 
