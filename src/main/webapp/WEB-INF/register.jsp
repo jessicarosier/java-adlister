@@ -11,6 +11,14 @@
         <h1>Please fill in your information.</h1>
         <form action="/register" method="post">
             <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input id="firstName" name="firstName" class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" name="lastName" class="form-control" type="text">
+            </div>
+            <div class="form-group">
                 <label for="username">Username</label>
                 <input id="username" name="username" class="form-control" type="text">
             </div>

@@ -15,29 +15,40 @@ import java.io.IOException;
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //if a user is logged in, redirect to profile
         if (request.getSession().getAttribute("user") != null) {
             response.sendRedirect("/profile");
             return;
         }
+        //otherwise, show the login page
         request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        //stores the username and password from the login form
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+
+        // checks if the username and password are in the database
         User user = DaoFactory.getUsersDao().findByUsername(username);
 
+        //if the username is not in the database, redirect to login
         if (user == null) {
             response.sendRedirect("/login");
             return;
         }
 
-        boolean validAttempt = Password.check(password, user.getPassword());
+        //is true if the password matches the hashed password in the database
+        boolean validAttempt = BCrypt.checkpw(password, user.getPassword());
 
+        //if the password is correct, redirect to profile
         if (validAttempt) {
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/profile");
         } else {
+            //otherwise, redirect to login page
             response.sendRedirect("/login");
         }
     }

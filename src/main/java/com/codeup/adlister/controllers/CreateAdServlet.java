@@ -15,24 +15,34 @@ import java.io.IOException;
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //if the user is NOT logged in, they should not be able to create an ad, so redirect them to the login page
         if(request.getSession().getAttribute("user") == null) {
             response.sendRedirect("/login");
             // add a return statement to exit out of the entire method.
             return;
         }
-
+        //otherwise, they are logged in, so they can create an ad
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
 
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //grabs the logged in user info from the session
         User loggedInUser = (User) request.getSession().getAttribute("user");
+
+        //creates a new ad object with the logged in user id,
+        //this add belongs to the logged in user
         Ad ad = new Ad(
             loggedInUser.getId(),
             request.getParameter("title"),
             request.getParameter("description")
         );
+
+        //inserts the new ad into the database
         DaoFactory.getAdsDao().insert(ad);
+
+        //redirects the user to the ads index page to display all ads
         response.sendRedirect("/ads");
     }
 }

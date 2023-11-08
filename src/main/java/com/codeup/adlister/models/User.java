@@ -1,21 +1,30 @@
 package com.codeup.adlister.models;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private long id;
+    private String firstName;
+    private String lastName;
     private String username;
     private String email;
     private String password;
 
-    public User() {}
+    public User() {
+    }
 
-    public User(String username, String email, String password) {
+    public User(String firstName, String lastName, String username, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    public User(long id, String username, String email, String password) {
+    public User(long id, String firstName, String lastName, String username, String email, String password) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -29,8 +38,24 @@ public class User {
         this.id = id;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     public String getUsername() {
         return username;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setUsername(String username) {

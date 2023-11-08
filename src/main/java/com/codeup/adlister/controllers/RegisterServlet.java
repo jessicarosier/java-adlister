@@ -19,32 +19,41 @@ public class RegisterServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //stores the user input from the form
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
         // validate input
-        boolean inputHasErrors = username.isEmpty()
+        boolean inputHasErrors = firstName.isEmpty()
+            || lastName.isEmpty()
+            || username.isEmpty()
             || email.isEmpty()
             || password.isEmpty()
             || (! password.equals(passwordConfirmation));
 
+        //if there are errors, send the user back to the register page
         if (inputHasErrors) {
             response.sendRedirect("/register");
             return;
         }
 
         // create and save a new user
-        User user = new User(username, email, password);
+        User user = new User(firstName, lastName, username, email, password);
 
-        // hash the password
+        // hash the password and add some salt
+        String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
-        String hash = Password.hash(user.getPassword());
-
+        //set the password to the hash
         user.setPassword(hash);
 
+        //insert the user into the database
         DaoFactory.getUsersDao().insert(user);
+
+        //redirect the user to the login page
         response.sendRedirect("/login");
     }
 }

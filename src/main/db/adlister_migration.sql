@@ -6,9 +6,11 @@ USE adlister_db;
 CREATE TABLE IF NOT EXISTS users
 (
     id       INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
     username VARCHAR(100) UNIQUE,
-    email    VARCHAR(100) NOT NULL,
-    password VARCHAR(50)  NOT NULL,
+    email    VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(500)  NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -40,7 +42,7 @@ CREATE TABLE IF NOT EXISTS ads_category
 (
     ad_id  INT UNSIGNED,
     cat_id INT UNSIGNED,
-    FOREIGN KEY (ad_id) REFERENCES ads (id),
+    FOREIGN KEY (ad_id) REFERENCES ads (id) ON DELETE CASCADE,
     FOREIGN KEY (cat_id) REFERENCES category (id)
 );
 
