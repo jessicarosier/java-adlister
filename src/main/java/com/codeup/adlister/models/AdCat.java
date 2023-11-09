@@ -2,15 +2,15 @@ package com.codeup.adlister.models;
 
 import java.io.Serializable;
 
-public class AdCategory implements Serializable {
+public class AdCat implements Serializable {
 
     private long catId;
 
     private long adId;
 
-    public AdCategory() {}
+    public AdCat() {}
 
-    public AdCategory(long catId, long adId) {
+    public AdCat(long catId, long adId) {
         this.catId = catId;
         this.adId = adId;
     }

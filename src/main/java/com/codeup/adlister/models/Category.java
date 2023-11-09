@@ -2,16 +2,16 @@ package com.codeup.adlister.models;
 
 import java.io.Serializable;
 
-public class Categories implements Serializable {
+public class Category implements Serializable {
 
     private long id;
 
     private String title;
 
-    public Categories() {
+    public Category() {
     }
 
-    public Categories(long id, String title) {
+    public Category(long id, String title) {
         this.id = id;
         this.title = title;
     }
