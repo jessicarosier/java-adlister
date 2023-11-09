@@ -1,6 +1,7 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -31,6 +32,11 @@ public class ListAdsDao implements Ads {
     @Override
     public void delete(String id) throws SQLException {
 
+    }
+
+    @Override
+    public List<Ad> getUserAds(User user) throws SQLException {
+        return null;
     }
 
     private List<Ad> generateAds() {
